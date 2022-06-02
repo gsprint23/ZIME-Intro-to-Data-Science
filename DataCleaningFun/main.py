@@ -26,7 +26,7 @@ class_ser = df["class"].copy() # so I don't get a warning
 # about setting a value on a slice
 for i in range(len(class_ser)):
     curr_class = str(class_ser.iloc[i])
-    print(curr_class)
+    # print(curr_class)
     # let's convert them all to be lowercase
     # "hoa" and "pd"
     curr_class = curr_class.lower()
@@ -34,8 +34,28 @@ for i in range(len(class_ser)):
         class_ser.iloc[i] = "hoa"
     # task: replace all the parkinson's related class values
     # with "pd"
-    # then overwrite the "class" column with class_ser
-    
-print(class_ser.value_counts())
+    elif "pd" in curr_class or "parkinson" in curr_class:
+        class_ser.iloc[i] = "pd"
+    else:
+        print("unrecognized class:", curr_class)
+
+# then overwrite the "class" column with class_ser
+df["class"] = class_ser
+print(df["class"].value_counts())
 
 # check column types
+for column in df.columns:
+    print(column, df[column].dtype) # dtype for data type
+    # object means string
+
+# print the total seconds over all participants' tasks
+print(type(df["duration"].sum())) # bug! the durations are strings
+# so we get string concatentation (+), not number addition
+# let's convert the duration column to integer type
+df["duration"] = df["duration"].astype(int)
+print(df["duration"].dtype)
+print(type(df["duration"].sum()))
+
+# finally, lets write out the cleaned dataframe to a file
+# for later use
+df.to_csv("pd_hoa_activities_cleaned.csv", index=False)
