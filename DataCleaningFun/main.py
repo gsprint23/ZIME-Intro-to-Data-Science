@@ -58,4 +58,5 @@ print(type(df["duration"].sum()))
 
 # finally, lets write out the cleaned dataframe to a file
 # for later use
+print(df.head())
 df.to_csv("pd_hoa_activities_cleaned.csv", index=False)
