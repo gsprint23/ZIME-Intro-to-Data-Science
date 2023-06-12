@@ -17,7 +17,7 @@ line comment
 ##num = input() # num is a variable
 ### what type is num?
 ##print(type(num))
-##rint("The number doubled is:", 2 * num)
+##print("The number doubled is:", 2 * num)
 
 # we need to convert num from a string
 # to a integer
